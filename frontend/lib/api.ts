@@ -1,4 +1,4 @@
-import type { SolveStep, MoodFlag } from './types';
+import type { MoodFlag } from './types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
@@ -20,11 +20,19 @@ export interface CoachExplainResponse {
   mood_flag: MoodFlag;
 }
 
+/** A solve step as the backend sends it (snake_case). The solve page maps it to SolveStep. */
+export interface BackendSolveStep {
+  step_number: number;
+  step_name: string;
+  moves: string[];
+  description: string;
+}
+
 export interface SolveSubmitResponse {
   session_id: number;
   total_moves: number;
   optimal_moves: number;
-  steps: SolveStep[];
+  steps: BackendSolveStep[];
   method_used: string;
 }
 

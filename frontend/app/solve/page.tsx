@@ -57,10 +57,10 @@ export default function SolvePage() {
       const res = await api.solve.submit(cubeState, methodUsed);
       setSessionId(res.session_id);
       // Map backend steps to our camelCase type
-      const mappedSteps: SolveStep[] = res.steps.map((s: Record<string, unknown>, i: number) => ({
-        stepNumber: (s.step_number as number) ?? (s.stepNumber as number) ?? i + 1,
-        stepName: (s.step_name as string) ?? (s.stepName as string) ?? `Step ${i + 1}`,
-        moves: (s.moves as string[]) ?? [],
+      const mappedSteps: SolveStep[] = res.steps.map((s) => ({
+        stepNumber: s.step_number,
+        stepName: s.step_name,
+        moves: s.moves,
         completed: false,
       }));
       setSteps(mappedSteps);
